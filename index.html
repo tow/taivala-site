@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taivala — From AI experiments to standard practice$1
+  
+  <!-- Meta & Social (set your production URL + add /assets/og.png) -->
+  <meta name="description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
+  <link rel="canonical" href="https://example.com/">
+  <meta name="theme-color" content="#0f0f0f">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Taivala — From AI experiments to standard practice">
+  <meta property="og:description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="assets/og.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Taivala — From AI experiments to standard practice">
+  <meta name="twitter:description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
+  <meta name="twitter:image" content="assets/og.png">
+
+  <style>
+    :root{ --bg:#f7f7f8; --surface:#ffffff; --ink:#0a0a0a; --muted:#5c5f66; --border:#e5e7eb; --accent:#0f0f0f; --accent-ink:#ffffff; --radius:16px; --radius-lg:24px; --shadow:0 2px 6px rgba(0,0,0,.04),0 12px 24px rgba(0,0,0,.06);} 
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;color:var(--ink);background:linear-gradient(#fff,#fff 40%, var(--bg));}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 24px}
+    .nav{position:sticky;top:0;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:20}
+    .nav .row{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:600}
+    .logo{width:32px;height:32px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700}
+    .menu{display:none;gap:18px;color:var(--muted);font-size:14px}
+    @media(min-width:900px){.menu{display:flex}}
+    .btn{display:inline-block;padding:10px 16px;border-radius:12px;border:1px solid var(--border);font-weight:500}
+    .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+    .btn.ghost:hover{background:var(--ink);color:#fff}
+
+    .hero{padding:84px 0 48px}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#fff;padding:6px 10px;border-radius:999px;box-shadow:var(--shadow);font-size:12px;color:var(--muted)}
+    h1{font-size:44px;line-height:1.1;margin:18px 0 8px}
+    @media(min-width:900px){h1{font-size:64px}}
+    .lead{color:var(--muted);font-size:18px;max-width:780px}
+
+    .section{padding:64px 0}
+    .section h2{font-size:26px;margin:0 0 8px}
+    .section p.sub{color:var(--muted);max-width:780px;margin:0 0 24px}
+
+    .grid{display:grid;gap:16px}
+    .g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .g-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media(max-width:900px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .small{font-size:14px;color:var(--muted)}
+    ul.clean{margin:10px 0 0;padding:0 0 0 18px}
+
+    .stack{margin-top:14px}
+    .layer{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:12px;background:#fff;padding:12px;box-shadow:var(--shadow)}
+    .layer + .layer{margin-top:10px}
+    .layer h4{margin:0;font-size:14px}
+    .layer .small{margin:0}
+    .taivala-plane{border:2px solid #111;border-style:solid dashed;border-radius:12px;padding:12px;margin-top:12px;background:#f9fafb}
+
+    .cta-band{background:var(--accent);color:#fff;border-radius:var(--radius-lg);padding:32px}
+    .footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:14px}
+    .tag{display:inline-block;border:1px solid var(--border);background:#fff;border-radius:10px;padding:6px 10px;font-size:13px;text-align:center}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container row">
+      <div class="brand"><div class="logo">T</div> Taivala</div>
+      <div class="menu">
+        <a href="#problem">Problem</a>
+        <a href="#product">Product</a>
+        <a href="#behaviors">Behaviors</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#cta">Contact</a>
+      </div>
+      <a class="btn" href="#cta">Book a working session</a>
+    </div>
+  </nav>
+
+  <!-- 1) HERO -->
+  <header class="hero">
+    <div class="container">
+      <span class="badge">DX‑first • Policy‑safe • Org‑scale</span>
+      <h1>From AI experiments to standard practice.</h1>
+      <p class="lead">Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.</p>
+      <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn primary" href="#cta">Book a working session</a>
+        <a class="btn ghost" href="#product">See how it works</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2) PROBLEM (Why now + pain) -->
+  <section id="problem" class="section">
+    <div class="container">
+      <h2>Why AI value lags</h2>
+      <p class="sub">AI tools spread faster than governance and proof. Without standard workflows and in‑flow policy, wins stay local and risk stays invisible.</p>
+      <div class="grid g-3">
+        <div class="card"><h3>From pockets to org</h3><p class="small">Local wins don’t scale without playbooks and paved paths teams will actually use.</p></div>
+        <div class="card"><h3>Proof & control together</h3><p class="small">Leadership needs visible progress while risk teams need least‑privilege, approvals, and audit.</p></div>
+        <div class="card"><h3>Policy in the flow</h3><p class="small">Policies on paper don’t change behavior; enforcement must live in IDE/chat and CI.</p></div>
+        <div class="card"><h3>Tool sprawl</h3><p class="small">Copilots, agents, services—great alone, chaotic together without a control plane.</p></div>
+        <div class="card"><h3>No rip‑and‑replace</h3><p class="small">You need standardization across today’s stack, not a mandate to switch tools.</p></div>
+        <div class="card"><h3>Prompts ≠ workflows</h3><p class="small">Individual prompting doesn’t create shared rituals; improvements don’t compound across teams.</p></div>
+      
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) PRODUCT (What is Taivala) -->
+  <section id="product" class="section">
+    <div class="container">
+      <h2>What is Taivala</h2>
+      <p class="sub">A control plane that standardizes AI‑assisted engineering—enabling repeatable workflows, policy enforcement, and measurable improvement across teams.</p>
+      <div class="grid g-3">
+        <div class="card"><h3>DX‑first onboarding</h3><p class="small">IDE & chat apps with SSO; team‑ready in minutes with developer‑friendly controls.</p>
+          <ul class="clean"><li>VS Code & JetBrains</li><li>Slack & Teams</li><li>Zero heavy config</li></ul></div>
+        <div class="card"><h3>Actions Registry</h3><p class="small">Least‑privilege actions with approvals, scoped credentials, and full audit.</p>
+          <ul class="clean"><li>Repo/env/team scoping</li><li>Approvals & policy packs</li><li>Event‑level audit export</li></ul></div>
+        <div class="card"><h3>Rollout & measurement</h3><p class="small">Cohorts & experiments to see what’s improving—and why. No vanity metrics.</p>
+          <ul class="clean"><li>Adoption by team/repo</li><li>Cohort comparisons</li><li>Executive snapshots</li></ul></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3 style="margin:0 0 6px">How it works (1‑2‑3)</h3>
+        <p class="small">Install & connect → Work in IDE/chat with approved actions → See behavior change in PRs, issues, and audit—no new dashboard required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) BEHAVIORS (Before → After) -->
+  <section id="behaviors" class="section">
+    <div class="container">
+      <h2>What changes in how your teams work</h2>
+      <p class="sub">Concrete before/after workflow changes you’ll notice in your existing tools—no rip‑and‑replace.</p>
+      <div class="grid g-3">
+        <div class="card">
+          <h3>Incident follow‑ups get done</h3>
+          <p class="small"><strong>Before:</strong> Post‑incident actions linger; tests/docs/alerts drift; owners forget.</p>
+          <p class="small"><strong>After:</strong> On incident closure, linked issues and draft PRs are created for fixes, tests, docs, and alerts; owners nudged in Slack/Teams until done.</p>
+          <p class="small"><em>Where:</em> PagerDuty/incident timeline, linked issues & PRs, Slack reminders.</p>
+        </div>
+        <div class="card"><h3>Reviews with fewer cycles</h3><p class="small"><strong>Before:</strong> Standards gaps caught late.</p><p class="small"><strong>After:</strong> PR pre‑check suggests fixes (API shape, tests, docs) or raises auto‑fix PRs.</p><p class="small"><em>Where:</em> PR checklist, comments, CI.</p></div>
+        <div class="card"><h3>Feature flow runs smoother</h3><p class="small"><strong>Before:</strong> Manual ticketing and handoffs.</p><p class="small"><strong>After:</strong> Tasks scaffolded, branch created, approved patterns reused, tickets/docs updated.</p><p class="small"><em>Where:</em> Issues, branches, linked PRs.</p></div>
+        <div class="card"><h3>Onboarding to first PR day one</h3><p class="small"><strong>Before:</strong> Days of setup.</p><p class="small"><strong>After:</strong> SSO + IDE plugin provide a guided “first change” path with guardrails.</p><p class="small"><em>Where:</em> IDE walkthrough, starter PR.</p></div>
+        <div class="card"><h3>Status updates write themselves</h3><p class="small"><strong>Before:</strong> Reporting tax.</p><p class="small"><strong>After:</strong> Weekly summary compiled from merged PRs/issues/incidents to Slack/Teams.</p><p class="small"><em>Where:</em> Slack/Teams post; brief.</p></div>
+        <div class="card"><h3>Standards drift prevented</h3><p class="small"><strong>Before:</strong> Drift accumulates; big refactors.</p><p class="small"><strong>After:</strong> Guardrails prompt approved patterns; small refactor PRs gated by approvals.</p><p class="small"><em>Where:</em> PR suggestions, audit.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5) ARCHITECTURE + SECURITY -->
+  <section id="architecture" class="section">
+    <div class="container">
+      <h2>Architecture & security</h2>
+      <p class="sub">Control plane across IDE/chat/CI with policy enforcement and audit. Built for enterprise safety from day one.</p>
+      <div class="stack">
+        <div class="layer"><h4>Developers</h4><p class="small">IDE plugins (VS Code/JetBrains/...), chat (Slack/Teams/...)</p></div>
+        <div class="layer"><h4>Taivala Control Plane</h4><p class="small">Tech policy • Actions Registry • Reporting • Guardrails • Audit</p></div>
+        <div class="layer"><h4>Your Stack</h4><p class="small">Source code repo • CI/CD • Project management • Cloud platforms • Ops & observability • Quality and testing • Security scanning • ...</p></div>
+        <div class="layer"><h4>LLM Providers</h4><p class="small">OpenAI • Anthropic • Amazon Bedrock • ...</p></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3 style="margin:0 0 8px">Security & privacy defaults</h3>
+        <div class="grid g-4">
+          <div class="card"><h3>No code retention</h3><p class="small">We don’t store your code. Prompts redacted; logs are metadata‑only.</p></div>
+          <div class="card"><h3>Customer‑controlled keys</h3><p class="small">Your vault/KMS; bring your LLM (Azure OpenAI, Bedrock, Vertex).</p></div>
+          <div class="card"><h3>Scoped permissions</h3><p class="small">Repo/env/team scoping with approvals; least‑privilege by default.</p></div>
+          <div class="card"><h3>Exportable audit</h3><p class="small">Event‑level audit stream to your SIEM (e.g., Splunk/Datadog).</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6) INTEGRATIONS -->
+  <section id="integrations" class="section">
+    <div class="container">
+      <h2>Integrations & compatibility</h2>
+      <p class="sub">Connect your stack in minutes—no rip‑and‑replace.</p>
+      <div class="grid g-4">
+        <span class="tag">GitHub</span>
+        <span class="tag">GitLab</span>
+        <span class="tag">Bitbucket</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">JetBrains</span>
+        <span class="tag">Slack</span>
+        <span class="tag">Teams</span>
+        <span class="tag">Jira</span>
+        <span class="tag">Linear</span>
+        <span class="tag">CircleCI</span>
+        <span class="tag">GitHub Actions</span>
+        <span class="tag">Argo</span>
+        <span class="tag">PagerDuty</span>
+        <span class="tag">Azure OpenAI</span>
+        <span class="tag">Amazon Bedrock</span>
+        <span class="tag">Google Vertex AI</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7) CTA / CONTACT -->
+  <section id="cta" class="section">
+    <div class="container">
+      <div class="cta-band">
+        <h2 style="margin:0 0 6px">Ready to make AI standard practice?</h2>
+        <p class="small" style="color:#d1d5db">See the operating model in action—no rip‑and‑replace, guardrails included.</p>
+        <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" style="background:#fff;color:#111" href="#">Book a working session</a>
+          <a class="btn" style="border-color:#ffffff66;color:#fff" href="#product">How it works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div class="brand"><div class="logo">T</div> © <span id="y"></span> Taivala — <span class="small">We never train on your code.</span></div>
+      <div style="display:flex;gap:16px">
+        <a href="#architecture">Security</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#cta">Contact</a>
+        <a href="#" aria-label="Privacy">Privacy</a>
+        <a href="#" aria-label="Terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
