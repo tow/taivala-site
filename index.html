@@ -22,80 +22,268 @@
   <meta name="twitter:title" content="Taivala — From AI experiments to standard practice">
   <meta name="twitter:description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
   <meta name="twitter:image" content="assets/og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Inter:wght@400;500;600&family=Manrope:wght@600;700&family=Space+Grotesk:wght@500;600&family=Fraunces:opsz,wght@14..144,500;14..144,600&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    :root{ --bg:#f7f7f8; --surface:#ffffff; --ink:#0a0a0a; --muted:#5c5f66; --border:#e5e7eb; --accent:#0f0f0f; --accent-ink:#ffffff; --radius:16px; --radius-lg:24px; --shadow:0 2px 6px rgba(0,0,0,.04),0 12px 24px rgba(0,0,0,.06);} 
+    :root{
+      color-scheme: light;
+      --radius:16px;
+      --radius-lg:24px;
+      --font-heading:'Manrope','Inter','Segoe UI',system-ui,sans-serif;
+      --font-body:'Inter','Segoe UI',system-ui,sans-serif;
+      --bg:#dce3f2;
+      --surface:#ffffff;
+      --surface-soft:rgba(255,255,255,0.9);
+      --ink:#0b1126;
+      --ink-soft:#1e2a49;
+      --muted:#5a6a8e;
+      --border:rgba(31,48,94,0.18);
+      --accent:#1f3c88;
+      --accent-ink:#f4f6ff;
+      --accent-soft:rgba(31,60,136,0.22);
+      --page-gradient:linear-gradient(180deg,#f3f4fb 0%,#e0e5f5 52%,#d4daec 100%);
+      --hero-gradient:linear-gradient(135deg,#f4f6ff 0%,#e3e9f7 48%,#d9e1f2 100%);
+      --cta-gradient:linear-gradient(135deg,#1e3364 0%,#255274 100%);
+      --shadow:0 18px 48px rgba(17,31,65,0.16);
+      --tag-bg:rgba(31,60,136,0.12);
+      --tag-border:rgba(31,48,94,0.18);
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;color:var(--ink);background:linear-gradient(#fff,#fff 40%, var(--bg));}
-    a{color:inherit;text-decoration:none}
+    body{
+      margin:0;
+      font-family:var(--font-body);
+      font-weight:400;
+      line-height:1.6;
+      color:var(--ink);
+      background:var(--page-gradient);
+      transition:background .6s ease,color .35s ease;
+      text-rendering:optimizeLegibility;
+    }
+    body[data-theme="aurora"]{
+      color-scheme: dark;
+      --font-heading:'Space Grotesk','IBM Plex Sans','Inter','Segoe UI',system-ui,sans-serif;
+      --font-body:'IBM Plex Sans','Inter','Segoe UI',system-ui,sans-serif;
+      --bg:#0c1022;
+      --surface:#131831;
+      --surface-soft:rgba(19,24,49,0.85);
+      --ink:#f8fafc;
+      --ink-soft:#e2e7ff;
+      --muted:#9fb3ff;
+      --border:rgba(99,102,241,0.32);
+      --accent:#8b5cf6;
+      --accent-ink:#050812;
+      --accent-soft:rgba(139,92,246,0.32);
+      --page-gradient:linear-gradient(180deg,#0f172a 0%,#14183a 48%,#051221 100%);
+      --hero-gradient:linear-gradient(135deg,#1b1f4b 0%,#1d3f60 46%,#1a1044 100%);
+      --cta-gradient:linear-gradient(135deg,#8b5cf6 0%,#22d3ee 100%);
+      --shadow:0 28px 60px rgba(3,7,18,0.55);
+      --tag-bg:rgba(34,211,238,0.24);
+      --tag-border:rgba(139,92,246,0.4);
+    }
+    body[data-theme="ember"]{
+      color-scheme: light;
+      --font-heading:'Fraunces','Work Sans','Inter','Segoe UI',system-ui,serif;
+      --font-body:'Work Sans','Inter','Segoe UI',system-ui,sans-serif;
+      --bg:#f3e7e3;
+      --surface:#fff9f6;
+      --surface-soft:rgba(255,244,239,0.94);
+      --ink:#2e1a16;
+      --ink-soft:#4f2b22;
+      --muted:#8a5a51;
+      --border:rgba(184,104,86,0.25);
+      --accent:#be4b32;
+      --accent-ink:#fff7f3;
+      --accent-soft:rgba(190,75,50,0.26);
+      --page-gradient:linear-gradient(180deg,#f9efeb 0%,#f2dfd7 50%,#e8cfc5 100%);
+      --hero-gradient:linear-gradient(135deg,#f8e6dc 0%,#f5d6c8 44%,#fdeee7 100%);
+      --cta-gradient:linear-gradient(135deg,#be4b32 0%,#f2724d 100%);
+      --shadow:0 20px 44px rgba(110,45,24,0.22);
+      --tag-bg:rgba(242,140,104,0.24);
+      --tag-border:rgba(190,75,50,0.3);
+    }
+    a{
+      color:inherit;
+      text-decoration:none;
+      transition:color .25s ease,opacity .25s ease;
+    }
+    a:hover{opacity:.86}
     .container{max-width:1120px;margin:0 auto;padding:0 24px}
-    .nav{position:sticky;top:0;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:20}
+    .nav{position:sticky;top:0;background:var(--surface-soft);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:20;transition:background .35s ease,border-color .35s ease,box-shadow .35s ease;box-shadow:0 10px 30px rgba(15,23,42,0.08)}
     .nav .row{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:600}
-    .logo{width:32px;height:32px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--ink-soft);transition:color .35s ease;font-family:var(--font-heading);letter-spacing:.01em}
+    .logo{width:32px;height:32px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;box-shadow:0 8px 16px var(--accent-soft);transition:background .35s ease,color .35s ease,box-shadow .35s ease}
     .menu{display:none;gap:18px;color:var(--muted);font-size:14px}
-    @media(min-width:900px){.menu{display:flex}}
-    .btn{display:inline-block;padding:10px 16px;border-radius:12px;border:1px solid var(--border);font-weight:500}
-    .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-    .btn.ghost:hover{background:var(--ink);color:#fff}
-
-    .hero{padding:84px 0 48px}
-    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:#fff;padding:6px 10px;border-radius:999px;box-shadow:var(--shadow);font-size:12px;color:var(--muted)}
-    h1{font-size:44px;line-height:1.1;margin:18px 0 8px}
+    .nav-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    .theme-toggle{display:flex;align-items:center;gap:6px;padding:4px;border-radius:999px;border:1px solid var(--border);background:var(--surface-soft);box-shadow:var(--shadow);transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+    .theme-pill{appearance:none;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:all .25s ease}
+    .theme-pill.is-active,.theme-pill:hover{background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 18px var(--accent-soft)}
+    .theme-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    @media(min-width:900px){
+      .menu{display:flex}
+    }
+    .btn{display:inline-block;padding:10px 16px;border-radius:12px;border:1px solid var(--border);font-weight:600;background:var(--surface);color:var(--ink);transition:background .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease;font-family:var(--font-heading);letter-spacing:.01em}
+    .btn:hover{box-shadow:0 12px 24px rgba(15,23,42,0.12)}
+    .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);box-shadow:0 12px 24px var(--accent-soft)}
+    .btn.primary:hover{transform:translateY(-1px)}
+    .btn.on-dark{background:var(--surface);color:var(--ink);border-color:var(--surface);box-shadow:0 10px 20px rgba(0,0,0,0.08)}
+    .btn.ghost{background:transparent}
+    .btn.ghost:hover{background:var(--ink);color:var(--accent-ink)}
+    header.hero{padding:84px 0 64px;background:var(--hero-gradient);position:relative;overflow:hidden}
+    header.hero::after{content:"";position:absolute;inset:-30% 20%;background:radial-gradient(circle at top right,var(--accent-soft),transparent 65%);opacity:.6;pointer-events:none;transform:rotate(8deg)}
+    header.hero .container{position:relative;z-index:1}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--surface);padding:6px 10px;border-radius:999px;box-shadow:var(--shadow);font-size:12px;color:var(--muted)}
+    h1{font-size:44px;line-height:1.1;margin:18px 0 8px;color:var(--ink);font-family:var(--font-heading);font-weight:600;letter-spacing:-0.01em}
     @media(min-width:900px){h1{font-size:64px}}
     .lead{color:var(--muted);font-size:18px;max-width:780px}
-
     .section{padding:64px 0}
-    .section h2{font-size:26px;margin:0 0 8px}
+    .section h2{font-size:26px;margin:0 0 8px;color:var(--ink);font-family:var(--font-heading);font-weight:600;letter-spacing:-0.005em}
     .section p.sub{color:var(--muted);max-width:780px;margin:0 0 24px}
-
     .grid{display:grid;gap:16px}
     .g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
     .g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
     .g-4{grid-template-columns:repeat(4,minmax(0,1fr))}
     @media(max-width:900px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
-
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-    .card h3{margin:0 0 8px;font-size:18px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transition:transform .3s ease,box-shadow .3s ease,background .3s ease,border-color .3s ease,color .3s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 36px var(--accent-soft)}
+    .card-icon{font-size:28px;line-height:1;margin-bottom:12px;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;background:var(--accent-soft);color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.45);transition:background .3s ease,color .3s ease,transform .3s ease}
+    .card-icon i{font-size:20px}
+    .card:hover .card-icon{transform:scale(1.05)}
+    .card-media{position:relative;display:block;height:156px;margin:-6px 0 16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,0.85),rgba(255,255,255,0.45));border:1px solid rgba(255,255,255,0.6);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.04),0 18px 36px rgba(15,23,42,0.12);overflow:hidden}
+    body[data-theme="aurora"] .card-media{background:linear-gradient(135deg,rgba(139,92,246,0.26),rgba(34,211,238,0.16));border:1px solid rgba(139,92,246,0.4)}
+    body[data-theme="ember"] .card-media{background:linear-gradient(135deg,rgba(242,140,104,0.28),rgba(255,244,239,0.7));border:1px solid rgba(190,75,50,0.28)}
+    .card-media span{position:absolute;bottom:12px;right:16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(15,23,42,0.48)}
+    body[data-theme="aurora"] .card-media span{color:rgba(226,231,255,0.68)}
+    body[data-theme="ember"] .card-media span{color:rgba(78,35,23,0.55)}
+    .card-media.terminal{padding:18px;border:1px solid rgba(15,23,42,0.35);background:linear-gradient(160deg,#111827,#0f172a);display:flex;flex-direction:column;gap:14px;box-shadow:0 22px 44px rgba(15,23,42,0.35);color:#e2e8f0;font-family:Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    body[data-theme="aurora"] .card-media.terminal{border-color:rgba(148,163,184,0.4);background:linear-gradient(160deg,#0b1120,#1e293b);color:#f1f5f9}
+    body[data-theme="ember"] .card-media.terminal{border-color:rgba(190,75,50,0.42);background:linear-gradient(160deg,#2e1a16,#4a251c);color:#fee2e2}
+    .card-media.analytics{padding:0;display:flex;align-items:center;justify-content:center}
+    .card-media.analytics img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit;box-shadow:0 18px 36px rgba(15,23,42,0.15)}
+    .card-media.terminal .term-bar{display:flex;align-items:center;gap:8px}
+    .card-media.terminal .term-dot{width:10px;height:10px;border-radius:50%;opacity:.85}
+    .card-media.terminal .term-dot.red{background:#f87171}
+    .card-media.terminal .term-dot.yellow{background:#facc15}
+    .card-media.terminal .term-dot.green{background:#34d399}
+    .card-media.terminal .term-title{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8}
+    .card-media.terminal pre{margin:0;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+    .card-flag{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;margin-bottom:12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+    .card-flag i{font-size:16px;line-height:1}
+    .card h3{margin:0 0 8px;font-size:18px;color:var(--ink);font-family:var(--font-heading);font-weight:600}
+    .card .card{box-shadow:none;transform:none}
+    .card .card:hover{box-shadow:none;transform:none}
     .small{font-size:14px;color:var(--muted)}
     ul.clean{margin:10px 0 0;padding:0 0 0 18px}
-
-    .stack{margin-top:14px}
-    .layer{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:12px;background:#fff;padding:12px;box-shadow:var(--shadow)}
-    .layer + .layer{margin-top:10px}
-    .layer h4{margin:0;font-size:14px}
-    .layer .small{margin:0}
-    .taivala-plane{border:2px solid #111;border-style:solid dashed;border-radius:12px;padding:12px;margin-top:12px;background:#f9fafb}
-
-    .cta-band{background:var(--accent);color:#fff;border-radius:var(--radius-lg);padding:32px}
-    .footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:14px}
-    .tag{display:inline-block;border:1px solid var(--border);background:#fff;border-radius:10px;padding:6px 10px;font-size:13px;text-align:center}
+    .arch-shell{margin-top:28px;border-radius:32px;padding:32px;border:1px solid var(--border);background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(236,242,255,0.72));box-shadow:0 28px 64px rgba(15,23,42,0.12);display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+    body[data-theme="aurora"] .arch-shell{background:linear-gradient(135deg,rgba(20,28,54,0.96),rgba(19,25,45,0.82));box-shadow:0 34px 72px rgba(3,7,18,0.55)}
+    body[data-theme="ember"] .arch-shell{background:linear-gradient(135deg,rgba(255,244,239,0.96),rgba(250,223,209,0.78));box-shadow:0 28px 58px rgba(110,45,24,0.25)}
+    .arch-panel{position:relative;border-radius:24px;padding:24px;border:1px solid rgba(31,60,136,0.18);background:rgba(255,255,255,0.82);box-shadow:0 18px 36px rgba(15,23,42,0.08)}
+    body[data-theme="aurora"] .arch-panel{background:rgba(17,24,39,0.82);border-color:rgba(139,92,246,0.32)}
+    body[data-theme="ember"] .arch-panel{background:rgba(255,244,239,0.9);border-color:rgba(190,75,50,0.28)}
+    .arch-panel h3{margin:0;font-size:16px;font-family:var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    body[data-theme="aurora"] .arch-panel h3{color:rgba(226,231,255,0.74)}
+    body[data-theme="ember"] .arch-panel h3{color:rgba(94,35,20,0.6)}
+    .arch-panel p{margin:8px 0 16px;color:var(--muted);font-size:13px;line-height:1.5}
+    .arch-before .arch-cloud{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+    .arch-chip{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:16px;border:1px dashed rgba(31,60,136,0.28);background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(220,227,242,0.7));font-size:13px;font-weight:600;color:var(--muted);box-shadow:0 8px 18px rgba(15,23,42,0.12);transition:transform .3s ease,box-shadow .3s ease}
+    .arch-chip:nth-child(odd){transform:rotate(-3deg)}
+    .arch-chip:nth-child(even){transform:rotate(4deg)}
+    .arch-chip:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 16px 28px rgba(15,23,42,0.14)}
+    .arch-before::after{content:"";position:absolute;inset:24px auto 24px 50%;width:160px;height:160px;background:radial-gradient(circle,rgba(31,60,136,0.12) 0,transparent 70%);filter:blur(4px);opacity:.7;pointer-events:none}
+    body[data-theme="aurora"] .arch-chip{border-color:rgba(139,92,246,0.36);background:linear-gradient(135deg,rgba(27,34,64,0.92),rgba(45,63,110,0.72));color:rgba(226,231,255,0.8)}
+    body[data-theme="aurora"] .arch-before::after{background:radial-gradient(circle,rgba(139,92,246,0.28) 0,transparent 70%)}
+    body[data-theme="ember"] .arch-chip{border-color:rgba(190,75,50,0.28);background:linear-gradient(135deg,rgba(255,244,239,0.95),rgba(247,215,200,0.8));color:rgba(94,35,20,0.74)}
+    body[data-theme="ember"] .arch-before::after{background:radial-gradient(circle,rgba(190,75,50,0.2) 0,transparent 70%)}
+    .arch-after{display:flex;flex-direction:column;gap:20px}
+    .arch-stack{position:relative;padding-left:34px;display:flex;flex-direction:column;gap:18px}
+    .arch-stack::before{content:"";position:absolute;top:14px;bottom:14px;left:10px;width:4px;border-radius:999px;background:linear-gradient(180deg,rgba(31,60,136,0.8),rgba(31,60,136,0))}
+    body[data-theme="aurora"] .arch-stack::before{background:linear-gradient(180deg,rgba(139,92,246,0.85),rgba(34,211,238,0))}
+    body[data-theme="ember"] .arch-stack::before{background:linear-gradient(180deg,rgba(190,75,50,0.82),rgba(242,140,104,0))}
+    .arch-tier{position:relative;padding:18px 20px;border-radius:18px;border:1px solid rgba(31,60,136,0.16);background:rgba(255,255,255,0.95);box-shadow:0 12px 24px rgba(15,23,42,0.12);display:flex;gap:16px;align-items:flex-start}
+    .arch-tier::before{content:"";position:absolute;left:-28px;top:calc(50% - 9px);width:18px;height:18px;border-radius:50%;background:var(--surface);border:3px solid rgba(31,60,136,0.35);box-shadow:0 0 0 4px rgba(255,255,255,0.5)}
+    body[data-theme="aurora"] .arch-tier::before{border-color:rgba(139,92,246,0.45);box-shadow:0 0 0 4px rgba(17,24,39,0.7)}
+    body[data-theme="ember"] .arch-tier::before{border-color:rgba(190,75,50,0.4);box-shadow:0 0 0 4px rgba(255,244,239,0.6)}
+    .arch-tier:first-child::before{box-shadow:0 0 0 4px rgba(255,255,255,0.4)}
+    .arch-tier .arch-icon{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(31,60,136,0.12);color:var(--accent)}
+    .arch-tier .arch-icon i{font-size:18px}
+    .arch-tier h4{margin:0;font-size:15px;font-family:var(--font-heading);letter-spacing:.01em;color:var(--ink)}
+    .arch-tier .small{margin:4px 0 0;color:var(--muted)}
+    body[data-theme="aurora"] .arch-tier{background:rgba(24,31,62,0.88);border-color:rgba(139,92,246,0.32);color:rgba(226,231,255,0.88)}
+    body[data-theme="aurora"] .arch-tier .arch-icon{background:rgba(139,92,246,0.18);color:rgba(226,231,255,0.9)}
+    body[data-theme="aurora"] .arch-tier h4{color:rgba(226,231,255,0.9)}
+    body[data-theme="aurora"] .arch-tier .small{color:rgba(198,203,238,0.74)}
+    body[data-theme="ember"] .arch-tier{background:rgba(255,244,239,0.94);border-color:rgba(190,75,50,0.22)}
+    body[data-theme="ember"] .arch-tier .arch-icon{background:rgba(190,75,50,0.16);color:rgba(94,35,20,0.82)}
+    body[data-theme="ember"] .arch-tier h4{color:rgba(64,28,16,0.9)}
+    body[data-theme="ember"] .arch-tier .small{color:rgba(110,45,24,0.72)}
+    .arch-tier[data-tone="control"]{border:1px solid transparent;background:linear-gradient(135deg,rgba(31,60,136,0.98),rgba(31,60,136,0.75));color:var(--accent-ink);box-shadow:0 28px 64px rgba(31,60,136,0.35)}
+    .arch-tier[data-tone="control"]::before{border-color:rgba(31,60,136,0.65);background:var(--accent);box-shadow:0 0 0 4px rgba(255,255,255,0.35)}
+    .arch-tier[data-tone="control"] .arch-icon{background:rgba(255,255,255,0.18);color:var(--accent-ink)}
+    .arch-tier[data-tone="control"] h4{color:var(--accent-ink)}
+    .arch-tier[data-tone="control"] .small{color:rgba(237,242,255,0.86)}
+    body[data-theme="aurora"] .arch-tier[data-tone="control"]{background:linear-gradient(135deg,rgba(139,92,246,0.92),rgba(34,211,238,0.72));color:#0a1020}
+    body[data-theme="aurora"] .arch-tier[data-tone="control"] .arch-icon{background:rgba(226,231,255,0.2);color:#0a1020}
+    body[data-theme="aurora"] .arch-tier[data-tone="control"] h4{color:#0a1020}
+    body[data-theme="aurora"] .arch-tier[data-tone="control"] .small{color:rgba(10,16,32,0.75)}
+    body[data-theme="ember"] .arch-tier[data-tone="control"]{background:linear-gradient(135deg,rgba(190,75,50,0.92),rgba(242,140,104,0.76));color:#fffaf4}
+    body[data-theme="ember"] .arch-tier[data-tone="control"] .arch-icon{background:rgba(255,255,255,0.18);color:#fffaf4}
+    body[data-theme="ember"] .arch-tier[data-tone="control"] h4{color:#fffaf4}
+    body[data-theme="ember"] .arch-tier[data-tone="control"] .small{color:rgba(255,250,244,0.86)}
+    .taivala-plane{border:2px solid var(--accent);border-style:solid dashed;border-radius:12px;padding:12px;margin-top:12px;background:var(--surface);box-shadow:var(--shadow)}
+    .cta-band{background:var(--cta-gradient);color:var(--accent-ink);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow);transition:background .35s ease,box-shadow .35s ease}
+    .cta-band .cta-header{display:flex;flex-direction:column;gap:10px}
+    .cta-actions{display:none}
+    .cta-band .btn{border-color:transparent}
+    .cta-band .btn.on-dark{background:var(--accent-ink);color:var(--accent);box-shadow:0 10px 20px rgba(0,0,0,0.18)}
+    .cta-band .btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.5);color:var(--accent-ink)}
+    .cta-band .small{color:rgba(255,255,255,0.78)}
+    .cta-band .small a{color:inherit;text-decoration:underline}
+    .cta-layout{margin-top:28px;display:grid;gap:24px}
+    @media(min-width:900px){.cta-layout{grid-template-columns:1fr 1fr}}
+    .contact-form{display:grid;gap:14px;background:rgba(255,255,255,0.14);padding:22px;border-radius:20px;border:1px solid rgba(255,255,255,0.45);box-shadow:0 18px 36px rgba(15,23,42,0.18);height:100%}
+    .contact-form label{display:flex;flex-direction:column;font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:600;color:rgba(255,255,255,0.76)}
+    .contact-form input,.contact-form textarea{width:100%;margin-top:6px;border-radius:12px;border:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.92);padding:10px 12px;font-family:var(--font-body);font-size:14px;color:#111827;line-height:1.4;transition:border-color .25s ease,box-shadow .25s ease}
+    .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,255,255,0.65)}
+    .contact-form textarea{min-height:120px;resize:vertical}
+    .contact-form button{margin-top:6px;justify-self:start}
+    .contact-form button.btn{padding:10px 18px}
+    .cta-scheduling{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.45);border-radius:20px;padding:16px;box-shadow:0 18px 36px rgba(15,23,42,0.18);display:flex;flex-direction:column;height:100%}
+    .cta-scheduling iframe{width:100%;flex:1;border-radius:12px;background:#fff}
+    .footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:14px;background:var(--surface-soft);backdrop-filter:blur(8px)}
+    .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--tag-border);background:var(--tag-bg);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--ink-soft);font-weight:500;letter-spacing:.01em}
+    .tag i{font-size:16px;line-height:1}
   </style>
 </head>
-<body>
+<body data-theme="aurora">
   <nav class="nav">
     <div class="container row">
       <div class="brand"><div class="logo">T</div> Taivala</div>
       <div class="menu">
-        <a href="#problem">Problem</a>
-        <a href="#product">Product</a>
-        <a href="#behaviors">Behaviors</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#integrations">Integrations</a>
-        <a href="#cta">Contact</a>
+        <a href="#problem">Why</a>
+        <a href="#product">Solution</a>
+        <a href="#behaviors">Impact</a>
+        <a href="#architecture">Platform</a>
+        <a href="#integrations">Stack</a>
+        <a href="#cta">Start</a>
       </div>
-      <a class="btn" href="#cta">Book a working session</a>
+      <div class="nav-actions">
+        <a class="btn" href="#cta">Contact us</a>
+      </div>
     </div>
   </nav>
 
   <!-- 1) HERO -->
   <header class="hero">
     <div class="container">
-      <span class="badge">DX‑first • Policy‑safe • Org‑scale</span>
       <h1>From AI experiments to standard practice.</h1>
-      <p class="lead">Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.</p>
+      <p class="lead">Taivala - the AI engineering control plane that makes AI-assisted workflows repeatable and measurable across your org - without replacing your stack.
+<br>
+<br>
+Lead your teams from isolated copilots to an AI-native operating model.</p>
       <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn primary" href="#cta">Book a working session</a>
+        <a class="btn primary" href="#cta">Contact us</a>
         <a class="btn ghost" href="#product">See how it works</a>
       </div>
     </div>
@@ -104,15 +292,15 @@
   <!-- 2) PROBLEM (Why now + pain) -->
   <section id="problem" class="section">
     <div class="container">
-      <h2>Why AI value lags</h2>
+      <h2>Why AI initiatives stall</h2>
       <p class="sub">AI tools spread faster than governance and proof. Without standard workflows and in‑flow policy, wins stay local and risk stays invisible.</p>
       <div class="grid g-3">
-        <div class="card"><h3>From pockets to org</h3><p class="small">Local wins don’t scale without playbooks and paved paths teams will actually use.</p></div>
-        <div class="card"><h3>Proof & control together</h3><p class="small">Leadership needs visible progress while risk teams need least‑privilege, approvals, and audit.</p></div>
-        <div class="card"><h3>Policy in the flow</h3><p class="small">Policies on paper don’t change behavior; enforcement must live in IDE/chat and CI.</p></div>
-        <div class="card"><h3>Tool sprawl</h3><p class="small">Copilots, agents, services—great alone, chaotic together without a control plane.</p></div>
-        <div class="card"><h3>No rip‑and‑replace</h3><p class="small">You need standardization across today’s stack, not a mandate to switch tools.</p></div>
-        <div class="card"><h3>Prompts ≠ workflows</h3><p class="small">Individual prompting doesn’t create shared rituals; improvements don’t compound across teams.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span><h3>Wins stay isolated</h3><p class="small">Local experiments thrive, but without shared playbooks and paved paths they never scale across the org.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span><h3>Trust gaps block rollout</h3><p class="small">Risk teams lack approvals, least‑privilege actions, and audit trails—so leadership hesitates to greenlight AI.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-arrows-rotate"></i></span><h3>Policy lives on paper</h3><p class="small">Guidelines in docs don’t change behavior; enforcement has to sit inside IDEs, chat, and CI.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><h3>Stack stays fragmented</h3><p class="small">Copilots and agents pile up without a control plane to orchestrate how they hit your internal platforms.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-plug"></i></span><h3>Platforms feel brittle</h3><p class="small">Teams need consistent guardrails across repos, pipelines, and envs—not another mandate to swap tooling.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span><h3>Prompts don’t scale</h3><p class="small">Individual prompting hacks never become shared workflows, so org-wide improvements stall.</p></div>
       
       </div>
     </div>
@@ -124,16 +312,20 @@
       <h2>What is Taivala</h2>
       <p class="sub">A control plane that standardizes AI‑assisted engineering—enabling repeatable workflows, policy enforcement, and measurable improvement across teams.</p>
       <div class="grid g-3">
-        <div class="card"><h3>DX‑first onboarding</h3><p class="small">IDE & chat apps with SSO; team‑ready in minutes with developer‑friendly controls.</p>
-          <ul class="clean"><li>VS Code & JetBrains</li><li>Slack & Teams</li><li>Zero heavy config</li></ul></div>
-        <div class="card"><h3>Actions Registry</h3><p class="small">Least‑privilege actions with approvals, scoped credentials, and full audit.</p>
-          <ul class="clean"><li>Repo/env/team scoping</li><li>Approvals & policy packs</li><li>Event‑level audit export</li></ul></div>
-        <div class="card"><h3>Rollout & measurement</h3><p class="small">Cohorts & experiments to see what’s improving—and why. No vanity metrics.</p>
-          <ul class="clean"><li>Adoption by team/repo</li><li>Cohort comparisons</li><li>Executive snapshots</li></ul></div>
+        <div class="card"><div class="card-media terminal" aria-hidden="true"><div class="term-bar"><span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span><span class="term-title">VS Code setup</span></div><pre>$ code --install-extension taivala-mcp.vsix</pre></div><h3>DX‑first onboarding</h3><p class="small">SSO, extensions, and organizational context land in minutes so every developer’s IDE and chat assistant knows your playbook from day one.</p>
+          <ul class="clean"><li>VS Code & JetBrains extensions with guided install</li><li>Slack & Teams assistants tuned to your platform capabilities</li><li>Technology strategy and standards delivered as MCP resources</li><li>Provisioning templates to roll out safely across teams</li></ul></div>
+        <div class="card"><div class="card-media analytics" aria-hidden="true"><img src="assets/context-actions-opt.jpg" alt="Context policy workspace showing technology guidance and approved actions." loading="lazy"></div><h3>Context + Action Registry</h3><p class="small">Codify strategy, preferred tech, and guardrails as an MCP resource paired with least‑privilege actions in the flow of work.</p>
+          <ul class="clean"><li>Engineering context surfaced to every developer</li><li>Guidance injected into IDE/chat assistants via MCP resources</li><li>Scoped credentials with approvals & policy packs</li><li>Event‑level audit export to your systems</li></ul></div>
+        <div class="card"><div class="card-media analytics" aria-hidden="true"><img src="assets/context-dashboard-opt.jpg" alt="Usage insights dashboard showing MCP adoption trends, categories, and time saved." loading="lazy"></div><h3>Rollout & measurement</h3><p class="small">Launch playbooks, monitor change, and prove impact with insight into both action usage and how org context is applied across delivery.</p>
+          <ul class="clean"><li>Adoption by team/repo with guardrail adherence</li><li>Cohort comparisons and experiment tracking</li><li>Executive snapshots, KPI exports, and audit signals</li><li>Feedback loops to refine context + actions continuously</li></ul></div>
       </div>
       <div class="card" style="margin-top:16px">
         <h3 style="margin:0 0 6px">How it works (1‑2‑3)</h3>
-        <p class="small">Install & connect → Work in IDE/chat with approved actions → See behavior change in PRs, issues, and audit—no new dashboard required.</p>
+        <ol class="clean" style="margin:0">
+          <li><strong>Connect Taivala</strong> — SSO, repositories, chat, and CI wire up so organizational context and policy are synchronized.</li>
+          <li><strong>Work inside your tools</strong> — Developers see strategy, guidelines, and approved actions in IDE/chat with guardrails enforced automatically.</li>
+          <li><strong>Measure & iterate</strong> — Roll out cohorts, track adoption, export audit signals, and continuously refine context plus actions.</li>
+        </ol>
       </div>
     </div>
   </section>
@@ -145,16 +337,17 @@
       <p class="sub">Concrete before/after workflow changes you’ll notice in your existing tools—no rip‑and‑replace.</p>
       <div class="grid g-3">
         <div class="card">
+          <span class="card-flag"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Incident Ops</span>
           <h3>Incident follow‑ups get done</h3>
           <p class="small"><strong>Before:</strong> Post‑incident actions linger; tests/docs/alerts drift; owners forget.</p>
           <p class="small"><strong>After:</strong> On incident closure, linked issues and draft PRs are created for fixes, tests, docs, and alerts; owners nudged in Slack/Teams until done.</p>
           <p class="small"><em>Where:</em> PagerDuty/incident timeline, linked issues & PRs, Slack reminders.</p>
         </div>
-        <div class="card"><h3>Reviews with fewer cycles</h3><p class="small"><strong>Before:</strong> Standards gaps caught late.</p><p class="small"><strong>After:</strong> PR pre‑check suggests fixes (API shape, tests, docs) or raises auto‑fix PRs.</p><p class="small"><em>Where:</em> PR checklist, comments, CI.</p></div>
-        <div class="card"><h3>Feature flow runs smoother</h3><p class="small"><strong>Before:</strong> Manual ticketing and handoffs.</p><p class="small"><strong>After:</strong> Tasks scaffolded, branch created, approved patterns reused, tickets/docs updated.</p><p class="small"><em>Where:</em> Issues, branches, linked PRs.</p></div>
-        <div class="card"><h3>Onboarding to first PR day one</h3><p class="small"><strong>Before:</strong> Days of setup.</p><p class="small"><strong>After:</strong> SSO + IDE plugin provide a guided “first change” path with guardrails.</p><p class="small"><em>Where:</em> IDE walkthrough, starter PR.</p></div>
-        <div class="card"><h3>Status updates write themselves</h3><p class="small"><strong>Before:</strong> Reporting tax.</p><p class="small"><strong>After:</strong> Weekly summary compiled from merged PRs/issues/incidents to Slack/Teams.</p><p class="small"><em>Where:</em> Slack/Teams post; brief.</p></div>
-        <div class="card"><h3>Standards drift prevented</h3><p class="small"><strong>Before:</strong> Drift accumulates; big refactors.</p><p class="small"><strong>After:</strong> Guardrails prompt approved patterns; small refactor PRs gated by approvals.</p><p class="small"><em>Where:</em> PR suggestions, audit.</p></div>
+        <div class="card"><span class="card-flag"><i class="fa-solid fa-check-double" aria-hidden="true"></i> PR Quality</span><h3>Reviews with fewer cycles</h3><p class="small"><strong>Before:</strong> Standards gaps caught late.</p><p class="small"><strong>After:</strong> PR pre‑check suggests fixes (API shape, tests, docs) or raises auto‑fix PRs.</p><p class="small"><em>Where:</em> PR checklist, comments, CI.</p></div>
+        <div class="card"><span class="card-flag"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Feature Flow</span><h3>Feature flow runs smoother</h3><p class="small"><strong>Before:</strong> Manual ticketing and handoffs.</p><p class="small"><strong>After:</strong> Tasks scaffolded, branch created, approved patterns reused, tickets/docs updated.</p><p class="small"><em>Where:</em> Issues, branches, linked PRs.</p></div>
+        <div class="card"><span class="card-flag"><i class="fa-solid fa-compass" aria-hidden="true"></i> Onboarding</span><h3>Onboarding to first PR day one</h3><p class="small"><strong>Before:</strong> Days of setup.</p><p class="small"><strong>After:</strong> SSO + IDE plugin provide a guided “first change” path with guardrails.</p><p class="small"><em>Where:</em> IDE walkthrough, starter PR.</p></div>
+        <div class="card"><span class="card-flag"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Exec Updates</span><h3>Status updates write themselves</h3><p class="small"><strong>Before:</strong> Reporting tax.</p><p class="small"><strong>After:</strong> Weekly summary compiled from merged PRs/issues/incidents to Slack/Teams.</p><p class="small"><em>Where:</em> Slack/Teams post; brief.</p></div>
+        <div class="card"><span class="card-flag"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Standards</span><h3>Standards drift prevented</h3><p class="small"><strong>Before:</strong> Drift accumulates; big refactors.</p><p class="small"><strong>After:</strong> Guardrails prompt approved patterns; small refactor PRs gated by approvals.</p><p class="small"><em>Where:</em> PR suggestions, audit.</p></div>
       </div>
     </div>
   </section>
@@ -164,19 +357,64 @@
     <div class="container">
       <h2>Architecture & security</h2>
       <p class="sub">Control plane across IDE/chat/CI with policy enforcement and audit. Built for enterprise safety from day one.</p>
-      <div class="stack">
-        <div class="layer"><h4>Developers</h4><p class="small">IDE plugins (VS Code/JetBrains/...), chat (Slack/Teams/...)</p></div>
-        <div class="layer"><h4>Taivala Control Plane</h4><p class="small">Tech policy • Actions Registry • Reporting • Guardrails • Audit</p></div>
-        <div class="layer"><h4>Your Stack</h4><p class="small">Source code repo • CI/CD • Project management • Cloud platforms • Ops & observability • Quality and testing • Security scanning • ...</p></div>
-        <div class="layer"><h4>LLM Providers</h4><p class="small">OpenAI • Anthropic • Amazon Bedrock • ...</p></div>
+      <div class="arch-shell">
+        <div class="arch-panel arch-before">
+          <h3>Before</h3>
+          <p class="small">Teams wire AI tooling directly into every surface—each IDE, bot, pipeline, and data source—so governance, policy, and audit have no single insertion point.</p>
+          <div class="arch-cloud">
+            <span class="arch-chip">IDE</span>
+            <span class="arch-chip">Chat Ops</span>
+            <span class="arch-chip">CI/CD</span>
+            <span class="arch-chip">Prod Access</span>
+            <span class="arch-chip">Secrets</span>
+            <span class="arch-chip">Data Warehouse</span>
+            <span class="arch-chip">Issue Tracker</span>
+            <span class="arch-chip">Observability</span>
+            <span class="arch-chip">LLM APIs</span>
+          </div>
+        </div>
+        <div class="arch-panel arch-after">
+          <h3>After</h3>
+          <p class="small">Taivala becomes the control plane: developers stay in their tools, while all actions route through policy, guardrails, and audit before touching your stack or model providers.</p>
+          <div class="arch-stack">
+            <div class="arch-tier" data-tone="devs">
+              <div class="arch-icon"><i class="fa-solid fa-users-gear" aria-hidden="true"></i></div>
+              <div>
+                <h4>Developers</h4>
+                <p class="small">IDE plugins, chat assistants, workflow hints delivered in the flow of work.</p>
+              </div>
+            </div>
+            <div class="arch-tier" data-tone="control">
+              <div class="arch-icon"><i class="fa-solid fa-diagram-next" aria-hidden="true"></i></div>
+              <div>
+                <h4>Taivala Control Plane</h4>
+                <p class="small">Policy packs, approvals, action registry, telemetry, and audit streaming.</p>
+              </div>
+            </div>
+            <div class="arch-tier" data-tone="stack">
+              <div class="arch-icon"><i class="fa-solid fa-cubes" aria-hidden="true"></i></div>
+              <div>
+                <h4>Your Stack</h4>
+                <p class="small">Source, CI/CD, tickets, docs, environments—integrated with least-privilege actions.</p>
+              </div>
+            </div>
+            <div class="arch-tier" data-tone="llms">
+              <div class="arch-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+              <div>
+                <h4>LLM Providers</h4>
+                <p class="small">OpenAI, Anthropic, Bedrock, in-house models—brokered through your tenancy & keys.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card" style="margin-top:16px">
         <h3 style="margin:0 0 8px">Security & privacy defaults</h3>
         <div class="grid g-4">
-          <div class="card"><h3>No code retention</h3><p class="small">We don’t store your code. Prompts redacted; logs are metadata‑only.</p></div>
-          <div class="card"><h3>Customer‑controlled keys</h3><p class="small">Your vault/KMS; bring your LLM (Azure OpenAI, Bedrock, Vertex).</p></div>
-          <div class="card"><h3>Scoped permissions</h3><p class="small">Repo/env/team scoping with approvals; least‑privilege by default.</p></div>
-          <div class="card"><h3>Exportable audit</h3><p class="small">Event‑level audit stream to your SIEM (e.g., Splunk/Datadog).</p></div>
+          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span><h3>No code retention</h3><p class="small">We don’t store your code. Prompts redacted; logs are metadata‑only.</p></div>
+          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-key"></i></span><h3>Customer‑controlled keys</h3><p class="small">Your vault/KMS; bring your LLM (Azure OpenAI, Bedrock, Vertex).</p></div>
+          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-user-shield"></i></span><h3>Scoped permissions</h3><p class="small">Repo/env/team scoping with approvals; least‑privilege by default.</p></div>
+          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span><h3>Exportable audit</h3><p class="small">Event‑level audit stream to your SIEM (e.g., Splunk/Datadog).</p></div>
         </div>
       </div>
     </div>
@@ -188,22 +426,22 @@
       <h2>Integrations & compatibility</h2>
       <p class="sub">Connect your stack in minutes—no rip‑and‑replace.</p>
       <div class="grid g-4">
-        <span class="tag">GitHub</span>
-        <span class="tag">GitLab</span>
-        <span class="tag">Bitbucket</span>
-        <span class="tag">VS Code</span>
-        <span class="tag">JetBrains</span>
-        <span class="tag">Slack</span>
-        <span class="tag">Teams</span>
-        <span class="tag">Jira</span>
-        <span class="tag">Linear</span>
-        <span class="tag">CircleCI</span>
-        <span class="tag">GitHub Actions</span>
-        <span class="tag">Argo</span>
-        <span class="tag">PagerDuty</span>
-        <span class="tag">Azure OpenAI</span>
-        <span class="tag">Amazon Bedrock</span>
-        <span class="tag">Google Vertex AI</span>
+        <span class="tag"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</span>
+        <span class="tag"><i class="fa-brands fa-gitlab" aria-hidden="true"></i>GitLab</span>
+        <span class="tag"><i class="fa-brands fa-bitbucket" aria-hidden="true"></i>Bitbucket</span>
+        <span class="tag"><i class="fa-solid fa-code" aria-hidden="true"></i>VS Code</span>
+        <span class="tag"><i class="fa-solid fa-brain" aria-hidden="true"></i>JetBrains</span>
+        <span class="tag"><i class="fa-brands fa-slack" aria-hidden="true"></i>Slack</span>
+        <span class="tag"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Teams</span>
+        <span class="tag"><i class="fa-brands fa-jira" aria-hidden="true"></i>Jira</span>
+        <span class="tag"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i>Linear</span>
+        <span class="tag"><i class="fa-solid fa-circle-notch" aria-hidden="true"></i>CircleCI</span>
+        <span class="tag"><i class="fa-solid fa-robot" aria-hidden="true"></i>GitHub Actions</span>
+        <span class="tag"><i class="fa-solid fa-ship" aria-hidden="true"></i>Argo</span>
+        <span class="tag"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i>PagerDuty</span>
+        <span class="tag"><i class="fa-brands fa-microsoft" aria-hidden="true"></i>Azure OpenAI</span>
+        <span class="tag"><i class="fa-brands fa-aws" aria-hidden="true"></i>Amazon Bedrock</span>
+        <span class="tag"><i class="fa-brands fa-google" aria-hidden="true"></i>Google Vertex AI</span>
       </div>
     </div>
   </section>
@@ -212,11 +450,30 @@
   <section id="cta" class="section">
     <div class="container">
       <div class="cta-band">
-        <h2 style="margin:0 0 6px">Ready to make AI standard practice?</h2>
-        <p class="small" style="color:#d1d5db">See the operating model in action—no rip‑and‑replace, guardrails included.</p>
-        <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn" style="background:#fff;color:#111" href="#">Book a working session</a>
-          <a class="btn" style="border-color:#ffffff66;color:#fff" href="#product">How it works</a>
+        <div class="cta-header">
+          <h2 style="margin:0 0 6px">Ready to make AI standard practice?</h2>
+          <p class="small">See the operating model in action—no rip‑and‑replace, guardrails included.</p>
+          <p class="small">Fill in the form, book a meeting, or just email us at <a href="mailto:contact@taivala.com">contact@taivala.com</a>.</p>
+        </div>
+        <div class="cta-layout" id="contact">
+          <form class="contact-form" action="#" method="post">
+            <label for="contact-name">Name
+              <input id="contact-name" name="name" type="text" autocomplete="name" required>
+            </label>
+            <label for="contact-email">Email
+              <input id="contact-email" name="email" type="email" autocomplete="email" required>
+            </label>
+            <label for="contact-company">Company
+              <input id="contact-company" name="company" type="text" autocomplete="organization">
+            </label>
+            <label for="contact-message">How can we help?
+              <textarea id="contact-message" name="message" required></textarea>
+            </label>
+            <button type="submit" class="btn on-dark">Send message</button>
+          </form>
+          <div class="cta-scheduling">
+            <iframe src="https://app.simplymeet.me/taivala?is_widget=1&view=" frameborder="0" scrolling="yes"></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -234,6 +491,35 @@
       </div>
     </div>
   </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    (function(){
+      const body=document.body;
+      const storageKey='taivala-theme';
+      const pills=Array.from(document.querySelectorAll('.theme-pill'));
+      const themeMeta=document.querySelector('meta[name="theme-color"]');
+      const applyTheme=theme=>{
+        if(!theme){return;}
+        body.dataset.theme=theme;
+        pills.forEach(btn=>{
+          btn.classList.toggle('is-active',btn.dataset.themeTarget===theme);
+        });
+        if(themeMeta){
+          const accent=getComputedStyle(body).getPropertyValue('--accent').trim();
+          themeMeta.setAttribute('content',accent || '#0f0f0f');
+        }
+        try{localStorage.setItem(storageKey,theme);}catch(_){}
+      };
+      let initial='signature';
+      try{
+        const saved=localStorage.getItem(storageKey);
+        if(saved && pills.some(btn=>btn.dataset.themeTarget===saved)){initial=saved;}
+      }catch(_){}
+      applyTheme(initial);
+      pills.forEach(btn=>{
+        btn.addEventListener('click',()=>applyTheme(btn.dataset.themeTarget));
+      });
+    }());
+    document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
 </body>
 </html>
