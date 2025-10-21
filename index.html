@@ -173,6 +173,9 @@
     .contact-form textarea{min-height:120px;resize:vertical}
     .contact-form button{margin-top:6px;justify-self:start}
     .contact-form button.btn{padding:10px 18px}
+    .contact-form [data-contact-status]{margin:4px 0 0;color:rgba(255,255,255,0.78)}
+    .contact-form [data-contact-status][data-tone="success"]{color:#c6f6d5}
+    .contact-form [data-contact-status][data-tone="error"]{color:#fed7d7}
     .cta-scheduling{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.45);border-radius:20px;padding:16px;box-shadow:0 18px 36px rgba(15,23,42,0.18);display:flex;flex-direction:column;height:100%}
     .cta-scheduling iframe{width:100%;flex:1;border-radius:12px;background:#fff}
     .footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:14px;background:var(--surface-soft);backdrop-filter:blur(8px)}
@@ -388,12 +391,13 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
               <input id="contact-email" name="email" type="email" autocomplete="email" required>
             </label>
             <label for="contact-company">Company
-              <input id="contact-company" name="company" type="text" autocomplete="organization">
+              <input id="contact-company" name="company" type="text" autocomplete="organization" required>
             </label>
             <label for="contact-message">How can we help?
               <textarea id="contact-message" name="message" required></textarea>
             </label>
             <button type="submit" class="btn on-dark">Send message</button>
+            <p class="small" data-contact-status role="status" aria-live="polite" hidden></p>
           </form>
           <div class="cta-scheduling">
             <iframe src="https://app.simplymeet.me/taivala?is_widget=1&view=" frameborder="0" scrolling="yes"></iframe>
@@ -415,5 +419,96 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
       </div>
     </div>
   </footer>
+  <script>
+    (function () {
+      const form = document.querySelector('.contact-form');
+      if (!form) return;
+
+      const statusArea = form.querySelector('[data-contact-status]');
+      const submitButton = form.querySelector('button[type="submit"]');
+      const endpoint = 'https://forms-eu1.hsforms.com/submissions/v3/integration/submit/147121218/67b13567-6633-4d3a-91a9-b52b4c9113e0';
+
+      const getCookie = (name) => {
+        return document.cookie
+          .split(';')
+          .map((cookie) => cookie.trim())
+          .find((cookie) => cookie.startsWith(name + '='))?.split('=')[1] ?? null;
+      };
+
+      const setStatus = (message, tone) => {
+        if (!statusArea) return;
+        statusArea.hidden = false;
+        statusArea.dataset.tone = tone;
+        statusArea.textContent = message;
+      };
+
+      const clearStatus = () => {
+        if (!statusArea) return;
+        statusArea.hidden = true;
+        statusArea.textContent = '';
+        delete statusArea.dataset.tone;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        clearStatus();
+        submitButton?.setAttribute('disabled', 'disabled');
+        if (submitButton) submitButton.textContent = 'Sending...';
+
+        const formData = new FormData(form);
+        const fullName = (formData.get('name') || '').trim();
+        const [firstname, lastname] = (() => {
+          if (!fullName) return ['', ''];
+          const parts = fullName.split(/\s+/);
+          if (parts.length === 1) return [parts[0], 'Not provided'];
+          return [parts[0], parts.slice(1).join(' ')];
+        })();
+        const payload = {
+          submittedAt: Date.now(),
+          fields: [
+            { name: '0-1/firstname', value: firstname },
+            { name: '0-1/lastname', value: lastname },
+            { name: '0-1/email', value: (formData.get('email') || '').trim() },
+            { name: '0-2/name', value: (formData.get('company') || '').trim() },
+            { name: '0-1/how_can_we_help_', value: (formData.get('message') || '').trim() }
+          ].filter((field) => field.value),
+          context: {
+            pageUri: window.location.href,
+            pageName: document.title
+          }
+        };
+
+        const hubspotUtk = getCookie('hubspotutk');
+        if (hubspotUtk) payload.context.hutk = hubspotUtk;
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error('HubSpot submission failed');
+          }
+
+          form.reset();
+          setStatus('Thanks! We will be in touch shortly.', 'success');
+        } catch (error) {
+          console.error(error);
+          setStatus('Something went wrong. Please try again or email contact@taivala.com.', 'error');
+        } finally {
+          if (submitButton) {
+            submitButton.removeAttribute('disabled');
+            submitButton.textContent = 'Send message';
+          }
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
