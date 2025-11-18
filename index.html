@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taivala — From AI experiments to standard practice</title>
+  <title>Taivala — Unblock AI transformation</title>
   
   <!-- Meta & Social (set your production URL + add /assets/og.png) -->
-  <meta name="description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
+  <meta name="description" content="Taivala gives copilots and agents the practical organizational knowledge they need to match your systems, standards, and guardrails.">
   <link rel="canonical" href="https://example.com/">
   <meta name="theme-color" content="#0c1624">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Taivala — From AI experiments to standard practice">
-  <meta property="og:description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
+  <meta property="og:title" content="Taivala — Unblock AI transformation">
+  <meta property="og:description" content="Taivala gives copilots and agents the practical organizational knowledge they need to match your systems, standards, and guardrails.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://example.com/">
   <meta property="og:image" content="assets/og.png">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Taivala — From AI experiments to standard practice">
-  <meta name="twitter:description" content="Taivala is the control plane that makes AI‑assisted workflows repeatable and measurable across your org—without replacing your stack.">
+  <meta name="twitter:title" content="Taivala — Unblock AI transformation">
+  <meta name="twitter:description" content="Taivala gives copilots and agents the practical organizational knowledge they need to match your systems, standards, and guardrails.">
   <meta name="twitter:image" content="assets/og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,6 +111,13 @@
       }
     }
     .lead{color:rgba(255,240,229,0.82);font-size:18px;max-width:780px}
+    .hero-ctas{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
+    .hero-ctas .btn{margin:0}
+    .cta-link{display:inline-flex;align-items:center;gap:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--ink-soft)}
+    .cta-link i{font-size:14px}
+    .proof-bar{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+    .proof-pill{padding:12px 16px;border-radius:999px;border:1px solid rgba(255,217,142,0.4);background:rgba(8,16,28,0.6);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--ink-soft)}
+    .proof-pill strong{margin-right:6px;color:var(--ink)}
     .section{padding:64px 0}
     .section h2{font-size:26px;margin:0 0 8px;color:var(--ink);font-family:var(--font-heading);font-weight:600;letter-spacing:-0.005em}
     .section p.sub{color:var(--muted);max-width:780px;margin:0 0 24px}
@@ -143,6 +150,14 @@
     .card .card:hover{box-shadow:none;transform:none}
     .small{font-size:14px;color:var(--muted)}
     ul.clean{margin:10px 0 0;padding:0 0 0 18px}
+    .step-list{counter-reset:steps;display:grid;gap:14px;margin:0;padding:0}
+    .step-list li{list-style:none;margin:0;padding:18px 18px 18px 58px;border-radius:var(--radius);border:1px solid rgba(255,217,142,0.28);background:linear-gradient(150deg,rgba(12,21,38,0.82),rgba(36,18,44,0.86));position:relative;box-shadow:0 18px 38px rgba(7,11,19,0.55)}
+    .step-list li::before{counter-increment:steps;content:counter(steps);position:absolute;left:18px;top:18px;width:26px;height:26px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:700;display:grid;place-items:center;font-size:13px}
+    .stat-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:24px 0 0;padding:0}
+    .stat-card{border:1px solid rgba(255,217,142,0.28);border-radius:var(--radius);padding:20px;background:linear-gradient(150deg,rgba(15,26,43,0.92),rgba(36,18,44,0.86));box-shadow:0 18px 44px rgba(7,11,19,0.55)}
+    .stat-card strong{display:block;font-size:28px;color:var(--accent);margin-bottom:6px}
+    .principles-list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+    .principles-list li{padding:14px 16px;border-radius:var(--radius);border:1px solid rgba(255,217,142,0.26);background:linear-gradient(150deg,rgba(12,20,34,0.9),rgba(42,24,46,0.86));font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--ink-soft)}
     .arch-shell{margin-top:28px;border-radius:32px;padding:32px;border:1px solid rgba(255,217,142,0.32);background:linear-gradient(135deg,rgba(15,28,46,0.94),rgba(38,24,45,0.9));box-shadow:0 32px 68px rgba(8,12,20,0.55);display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
     .arch-panel{position:relative;border-radius:24px;padding:26px;border:1px solid rgba(255,217,142,0.45);background:linear-gradient(155deg,rgba(27,35,51,0.9),rgba(47,26,45,0.88));box-shadow:0 26px 52px rgba(9,14,24,0.48)}
     .arch-panel h3{margin:0;font-size:16px;font-family:var(--font-heading);letter-spacing:.22em;text-transform:uppercase;color:rgba(245,239,226,0.78)}
@@ -206,11 +221,12 @@
     <div class="container row">
       <div class="brand"><div class="logo">T</div> Taivala</div>
       <div class="menu">
-        <a href="#problem">Why</a>
-        <a href="#product">Solution</a>
-        <a href="#behaviors">Impact</a>
-        <a href="#architecture">Platform</a>
-        <a href="#integrations">Integrations</a>
+        <a href="#problem">Problem</a>
+        <a href="#product">What we do</a>
+        <a href="#how">How it works</a>
+        <a href="#why-matters">Impact</a>
+        <a href="#why-taivala">Why Taivala</a>
+        <a href="#architecture">Trust</a>
         <a href="#cta">Start</a>
       </div>
       <div class="nav-actions">
@@ -222,14 +238,18 @@
   <!-- 1) HERO -->
   <header class="hero">
     <div class="container">
-      <h1>From AI experiments to standard practice.</h1>
-      <p class="lead">Taivala - the AI engineering control plane that makes AI-assisted workflows repeatable and measurable across your org - without replacing your stack.
-<br>
-<br>
-Lead your teams from isolated copilots to an AI-native operating model.</p>
-      <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn primary" href="#cta">Contact us</a>
-        <a class="btn ghost" href="#product">See how it works</a>
+      <h1>Unblock AI Transformation: From Experiments to Real Impact</h1>
+      <p class="lead">Boost AI adoption. Cut cycle time. Scale securely.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#how">See how it works</a>
+        <a class="btn ghost" href="#cta">Talk to us</a>
+        <a class="cta-link" href="#cta">Free AI rollout consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="proof-bar" aria-label="Proof points">
+        <span class="proof-pill"><strong>4×</strong>AI adoption</span>
+        <span class="proof-pill"><strong>50%</strong>faster cycle time</span>
+        <span class="proof-pill"><strong>25%</strong>more PR throughput</span>
+        <span class="proof-pill"><strong>350+</strong>engineer org proven</span>
       </div>
     </div>
   </header>
@@ -237,16 +257,24 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
   <!-- 2) PROBLEM (Why now + pain) -->
   <section id="problem" class="section">
     <div class="container">
-      <h2>Why AI initiatives stall</h2>
-      <p class="sub">AI tools spread faster than governance and proof. Without standard workflows and in‑flow policy, wins stay local and risk stays invisible.</p>
+      <h2>The problem</h2>
+      <p class="sub">AI adoption grows in pockets: a few developers get great results, most don’t, and the organisation doesn’t accelerate.</p>
       <div class="grid g-3">
-        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span><h3>Wins stay isolated</h3><p class="small">Local experiments thrive, but without shared playbooks and paved paths they never scale across the org.</p></div>
-        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span><h3>Trust gaps block rollout</h3><p class="small">Risk teams lack approvals, least‑privilege actions, and audit trails—so leadership hesitates to greenlight AI.</p></div>
-        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-arrows-rotate"></i></span><h3>Policy lives on paper</h3><p class="small">Guidelines in docs don’t change behavior; enforcement has to sit inside IDEs, chat, and CI.</p></div>
-        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><h3>Stack stays fragmented</h3><p class="small">Copilots and agents pile up without a control plane to orchestrate how they hit your internal platforms.</p></div>
-        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-plug"></i></span><h3>Platforms feel brittle</h3><p class="small">Teams need consistent guardrails across repos, pipelines, and envs—not another mandate to swap tooling.</p></div>
-        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span><h3>Prompts don’t scale</h3><p class="small">Individual prompting hacks never become shared workflows, so org-wide improvements stall.</p></div>
-      
+        <div class="card">
+          <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-chart-pie"></i></span>
+          <h3>AI gains stay local</h3>
+          <p class="small">Copilots and agents land with a handful of champions while the rest of the org sees uneven value.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-circle-question"></i></span>
+          <h3>The root cause</h3>
+          <p class="small">Copilots and agents don’t understand your systems, standards, or decisions — so their output is inconsistent and hard to scale.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-wave-square"></i></span>
+          <h3>No shared understanding</h3>
+          <p class="small">Without institutional context flowing into AI, you get local gains but no organisation-wide momentum.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -254,54 +282,81 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
   <!-- 3) PRODUCT (What is Taivala) -->
   <section id="product" class="section">
     <div class="container">
-      <h2>What is Taivala</h2>
-      <p class="sub">A control plane that standardizes AI‑assisted engineering—enabling repeatable workflows, policy enforcement, and measurable improvement across teams.</p>
+      <h2>What Taivala does</h2>
+      <p class="sub">Taivala gives AI the practical organisational knowledge your developers rely on. We bring together Slack, Jira, Confluence, Git, architecture notes, runbooks, decisions and examples—and make that knowledge available directly inside developers’ IDEs.</p>
       <div class="grid g-3">
-        <div class="card"><div class="card-media terminal" aria-hidden="true"><div class="term-bar"><span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span><span class="term-title">VS Code setup</span></div><pre>$ code --install-extension taivala-mcp.vsix</pre></div><h3>DX‑first onboarding</h3><p class="small">SSO, extensions, and organizational context land in minutes so every developer’s IDE and chat assistant knows your playbook from day one.</p>
-          <ul class="clean"><li>VS Code & JetBrains extensions with guided install</li><li>Slack & Teams assistants tuned to your platform capabilities</li><li>Technology strategy and standards delivered as MCP resources</li><li>Provisioning templates to roll out safely across teams</li></ul></div>
-        <div class="card"><div class="card-media analytics" aria-hidden="true"><img src="assets/context-actions-opt.jpg" alt="Context policy workspace showing technology guidance and approved actions." loading="lazy"></div><h3>Context + Action Registry</h3><p class="small">Codify strategy, preferred tech, and guardrails as an MCP resource paired with least‑privilege actions in the flow of work.</p>
-          <ul class="clean"><li>Engineering context surfaced to every developer</li><li>Guidance injected into IDE/chat assistants via MCP resources</li><li>Scoped credentials with approvals & policy packs</li><li>Event‑level audit export to your systems</li></ul></div>
-        <div class="card"><div class="card-media analytics" aria-hidden="true"><img src="assets/context-dashboard-opt.jpg" alt="Usage insights dashboard showing MCP adoption trends, categories, and time saved." loading="lazy"></div><h3>Rollout & measurement</h3><p class="small">Launch playbooks, monitor change, and prove impact with insight into both action usage and how org context is applied across delivery.</p>
-          <ul class="clean"><li>Adoption by team/repo with guardrail adherence</li><li>Cohort comparisons and experiment tracking</li><li>Executive snapshots, KPI exports, and audit signals</li><li>Feedback loops to refine context + actions continuously</li></ul></div>
+        <div class="card"><div class="card-media terminal" aria-hidden="true"><div class="term-bar"><span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span><span class="term-title">Org graph</span></div><pre>taivala context sync --sources slack jira git confluence</pre></div><h3>Organisational knowledge graph</h3><p class="small">Continuously ingest the decisions, runbooks, and examples your teams trust so copilots inherit the same context.</p>
+          <ul class="clean"><li>Connect Slack, Jira, Confluence, Git and architecture sources</li><li>Auto-curate reusable decisions, standards, and examples</li><li>Keep context current with change detection and gaps surfaced</li><li>Approve what becomes org knowledge with audit trails</li></ul></div>
+        <div class="card"><div class="card-media analytics" aria-hidden="true"><img src="assets/context-actions-opt.jpg" alt="Context policy workspace showing technology guidance and approved actions." loading="lazy"></div><h3>Context inside the flow</h3><p class="small">Developers see the right guidance inside IDEs, chat, and reviews so AI output matches your systems and standards.</p>
+          <ul class="clean"><li>VS Code, JetBrains, Claude Code, Slack, and Teams surfaces</li><li>Context-aware copilots paired with least-privilege actions</li><li>Guardrails that mirror your governance automatically</li><li>Less rework because AI output mirror your real stack</li></ul></div>
+        <div class="card"><div class="card-media analytics" aria-hidden="true"><img src="assets/context-dashboard-opt.jpg" alt="Usage insights dashboard showing MCP adoption trends, categories, and time saved." loading="lazy"></div><h3>Scale, visibility, guardrails</h3><p class="small">Leaders get the signal to prove adoption, see where AI struggles, and enforce safe rollout.</p>
+          <ul class="clean"><li>Adoption by team, repo, and workflow with cohort tracking</li><li>Gap detection shows where AI can’t find the answer</li><li>Guardrail breaches, approvals, and audit-ready logs</li><li>Insights for product, platform, and security leads</li></ul></div>
       </div>
       <div class="card" style="margin-top:16px">
-        <h3 style="margin:0 0 6px">How it works (1‑2‑3)</h3>
-        <ol class="clean" style="margin:0">
-          <li><strong>Connect Taivala</strong> — SSO, repositories, chat, and CI wire up so organizational context and policy are synchronized.</li>
-          <li><strong>Work inside your tools</strong> — Developers see strategy, guidelines, and approved actions in IDE/chat with guardrails enforced automatically.</li>
-          <li><strong>Measure & iterate</strong> — Roll out cohorts, track adoption, export audit signals, and continuously refine context plus actions.</li>
-        </ol>
+        <h3 style="margin:0 0 6px">With Taivala:</h3>
+        <ul class="clean" style="margin:0">
+          <li>AI output matches your systems and standards</li>
+          <li>More developers get consistent value</li>
+          <li>Rework drops because guidance is embedded</li>
+          <li>AI adoption starts spreading naturally</li>
+        </ul>
+        <p class="small" style="margin:12px 0 0">This is what makes AI actually scale.</p>
       </div>
     </div>
   </section>
 
   <!-- 4) BEHAVIORS (Before → After) -->
-  <section id="behaviors" class="section">
+  <section id="how" class="section">
     <div class="container">
-      <h2>What changes in how your teams work</h2>
-      <p class="sub">Concrete before/after workflow changes you’ll notice in your existing tools—no rip‑and‑replace.</p>
-      <div class="grid g-3">
-        <div class="card">
-          <span class="card-flag"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Incident Ops</span>
-          <h3>Incident follow‑ups get done</h3>
-          <p class="small"><strong>Before:</strong> Post‑incident actions linger; tests/docs/alerts drift; owners forget.</p>
-          <p class="small"><strong>After:</strong> On incident closure, linked issues and draft PRs are created for fixes, tests, docs, and alerts; owners nudged in Slack/Teams until done.</p>
-          <p class="small"><em>Where:</em> PagerDuty/incident timeline, linked issues & PRs, Slack reminders.</p>
-        </div>
-        <div class="card"><span class="card-flag"><i class="fa-solid fa-check-double" aria-hidden="true"></i> PR Quality</span><h3>Reviews with fewer cycles</h3><p class="small"><strong>Before:</strong> Standards gaps caught late.</p><p class="small"><strong>After:</strong> PR pre‑check suggests fixes (API shape, tests, docs) or raises auto‑fix PRs.</p><p class="small"><em>Where:</em> PR checklist, comments, CI.</p></div>
-        <div class="card"><span class="card-flag"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Feature Flow</span><h3>Feature flow runs smoother</h3><p class="small"><strong>Before:</strong> Manual ticketing and handoffs.</p><p class="small"><strong>After:</strong> Tasks scaffolded, branch created, approved patterns reused, tickets/docs updated.</p><p class="small"><em>Where:</em> Issues, branches, linked PRs.</p></div>
-        <div class="card"><span class="card-flag"><i class="fa-solid fa-compass" aria-hidden="true"></i> Onboarding</span><h3>Onboarding to first PR day one</h3><p class="small"><strong>Before:</strong> Days of setup.</p><p class="small"><strong>After:</strong> SSO + IDE plugin provide a guided “first change” path with guardrails.</p><p class="small"><em>Where:</em> IDE walkthrough, starter PR.</p></div>
-        <div class="card"><span class="card-flag"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Exec Updates</span><h3>Status updates write themselves</h3><p class="small"><strong>Before:</strong> Reporting tax.</p><p class="small"><strong>After:</strong> Weekly summary compiled from merged PRs/issues/incidents to Slack/Teams.</p><p class="small"><em>Where:</em> Slack/Teams post; brief.</p></div>
-        <div class="card"><span class="card-flag"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Standards</span><h3>Standards drift prevented</h3><p class="small"><strong>Before:</strong> Drift accumulates; big refactors.</p><p class="small"><strong>After:</strong> Guardrails prompt approved patterns; small refactor PRs gated by approvals.</p><p class="small"><em>Where:</em> PR suggestions, audit.</p></div>
+      <h2>How it works</h2>
+      <p class="sub">Five simple steps to move from experiments to organisation-wide AI impact.</p>
+      <ol class="step-list">
+        <li><strong>Install a simple IDE plugin</strong> — a 30-second setup on VS Code, JetBrains, Claude Code, etc. connects developers’ tools to Taivala.</li>
+        <li><strong>Developers get scattered org knowledge in one place</strong> — runbooks, architecture notes, and decisions surface right inside their tools.</li>
+        <li><strong>Curated policy keeps copilots aligned</strong> — AI output routes through your guardrails so answers match standards from the start.</li>
+        <li><strong>Taivala detects gaps and keeps context alive</strong> — missing knowledge is remedied and shared understanding stays in sync.</li>
+        <li><strong>Leaders get visibility and guardrails</strong> — adoption, policy, and safety are measured and enforced.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="why-matters" class="section">
+    <div class="container">
+      <h2>Why this matters</h2>
+      <p class="sub">When AI understands your organisation, engineering improves as a whole — not just in isolated teams.</p>
+      <div class="stat-grid">
+        <div class="stat-card"><strong>4×</strong><p class="small">effective AI usage</p></div>
+        <div class="stat-card"><strong>50%</strong><p class="small">faster cycle time</p></div>
+        <div class="stat-card"><strong>25%</strong><p class="small">more PR throughput</p></div>
+        <div class="stat-card"><strong>Faster</strong><p class="small">onboarding to first PR</p></div>
+        <div class="stat-card"><strong>Less</strong><p class="small">drift from standards</p></div>
+        <div class="stat-card"><strong>More</strong><p class="small">predictable engineering flow</p></div>
+        <div class="stat-card"><strong>Security</strong><p class="small">teams remain confident</p></div>
       </div>
+      <p class="sub" style="margin-top:24px">This is how AI becomes standard practice.</p>
+    </div>
+  </section>
+
+  <section id="why-taivala" class="section">
+    <div class="container">
+      <h2>Why Taivala</h2>
+      <p class="sub">Taivala is built from hands-on experience leading an AI-enabled engineering transformation in a large cybersecurity organisation.</p>
+      <p class="sub">We’ve solved the practical blockers before — uneven adoption, inconsistent output, unclear governance — and delivered measurable, organisation-level impact.</p>
+      <p class="sub">Taivala is the productized version of that success.</p>
+      <h3 style="margin-top:18px">Principles</h3>
+      <ul class="principles-list">
+        <li>Developer-first</li>
+        <li>Alignment through shared knowledge</li>
+        <li>Compounding organisational value</li>
+      </ul>
     </div>
   </section>
 
   <!-- 5) ARCHITECTURE + SECURITY -->
   <section id="architecture" class="section">
     <div class="container">
-      <h2>Architecture & security</h2>
-      <p class="sub">Control plane across IDE/chat/CI with policy enforcement and audit. Built for enterprise safety from day one.</p>
+      <h2>Trust & security</h2>
+      <p class="sub">Built by former cybersecurity CTOs, Taivala is a zero-trust gateway for AI access with approvals, audit, and governance wired in. <a href="trust.html">Dive deeper on the Trust & Security program →</a></p>
       <div class="arch-shell">
         <div class="arch-panel arch-before">
           <h3>Before</h3>
@@ -353,14 +408,16 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
           </div>
         </div>
       </div>
-      <div class="card" style="margin-top:16px">
-        <h3 style="margin:0 0 8px">Security & privacy defaults</h3>
-        <div class="grid g-4">
-          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span><h3>No code retention</h3><p class="small">We don’t store your code. Prompts redacted; logs are metadata‑only.</p></div>
-          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-key"></i></span><h3>Customer‑controlled keys</h3><p class="small">Your vault/KMS; bring your LLM (Azure OpenAI, Bedrock, Vertex).</p></div>
-          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-user-shield"></i></span><h3>Scoped permissions</h3><p class="small">Repo/env/team scoping with approvals; least‑privilege by default.</p></div>
-          <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></span><h3>Exportable audit</h3><p class="small">Event‑level audit stream to your SIEM (e.g., Splunk/Datadog).</p></div>
-        </div>
+      <div class="grid g-3" style="margin-top:16px">
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-user-shield"></i></span><h3>Security leadership</h3><p class="small">Founded by the former CTO of Finland’s leading cybersecurity company; informed by independent incident response and compliance advisors.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-gears"></i></span><h3>Secure architecture & development</h3><p class="small">Secure SDLC with threat modeling, dependency scanning, environment isolation, and continuous application security testing.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-fingerprint"></i></span><h3>Enterprise identity</h3><p class="small">SSO/SAML, SCIM, RBAC, and inherited MFA so least-privilege access follows your IdP policies from day one.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></span><h3>Zero-trust gateway</h3><p class="small">Approvals, scopes, and policy packs protect every AI action before it reaches code, data, or environments.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span><h3>Full audit trail</h3><p class="small">Exportable, metadata-only logs streaming to your SIEM plus pen-test summaries under NDA.</p></div>
+        <div class="card"><span class="card-icon" aria-hidden="true"><i class="fa-solid fa-certificate"></i></span><h3>Compliance roadmap</h3><p class="small">ISO 27001 & SOC 2 underway with independent auditors guiding current controls.</p></div>
+      </div>
+      <div style="margin-top:24px">
+        <a class="btn primary" href="trust.html" style="text-transform:none;letter-spacing:.08em">Explore Trust & Security brief</a>
       </div>
     </div>
   </section>
@@ -396,9 +453,11 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
     <div class="container">
       <div class="cta-band">
         <div class="cta-header">
-          <h2 style="margin:0 0 6px">Ready to make AI standard practice?</h2>
-          <p class="small">See the operating model in action—no rip‑and‑replace, guardrails included.</p>
-          <p class="small">Fill in the form, book a meeting, or just email us at <a href="mailto:contact@taivala.com">contact@taivala.com</a>.</p>
+          <h2 style="margin:0 0 6px">Get started</h2>
+          <p class="small">Free AI rollout consultation — no commitment.</p>
+          <p class="small">A practical assessment of your AI adoption bottlenecks and opportunities, based on real-world transformation experience.</p>
+          <p class="small">Prefer email? <a href="mailto:contact@taivala.com">contact@taivala.com</a></p>
+          <a class="cta-link" href="#contact">Get early access <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="cta-layout" id="contact">
           <form class="contact-form" action="#" method="post">
@@ -418,7 +477,7 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
             <p class="small" data-contact-status role="status" aria-live="polite" hidden></p>
           </form>
           <div class="cta-scheduling">
-            <iframe src="https://app.simplymeet.me/taivala?is_widget=1&view=" frameborder="0" scrolling="yes"></iframe>
+            <iframe src="https://outlook.office.com/bookwithme/user/1159757ea2b44099a838fab229b5d462@taivala.com/meetingtype/MszAfitmWkiTy9f0flGlLw2?anonymous&ismsaljsauthenabled&ep=mlink" frameborder="0" scrolling="yes"></iframe>
           </div>
         </div>
       </div>
@@ -427,7 +486,7 @@ Lead your teams from isolated copilots to an AI-native operating model.</p>
 
   <footer class="footer">
     <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div class="brand"><div class="logo">T</div> © 2025 Taivala — <span class="small">DX-first • Org-scale • Policy safe.</span></div>
+      <div class="brand"><div class="logo">T</div> © 2025 Taivala — <span class="small">Org-scale AI • Shared knowledge • Secure guardrails.</span></div>
       <div style="display:flex;gap:16px">
         <a href="trust.html">Trust & Security</a>
         <a href="#integrations">Integrations</a>
